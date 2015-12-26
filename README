@@ -1,0 +1,45 @@
+README for lib6022
+
+To compile the library (lib6022.so) and example application (test_lib6022):
+
+cd src/
+make
+
+test_lib6022 should be located in src/, and lib6022.so in lib/.
+
+To run test_lib6022:
+
+cd src/
+LD_LIBRARY_PATH=../lib/:$LD_LIBRARY_PATH ./test_lib6022
+
+To clean all build directories:
+cd src/
+make clean
+
+
+To use the test application, you must first load firmware into your scope. To do this, you need fxload from linux-hotplug (http://sourceforge.net/projects/linux-hotplug/files/fxload/), and custom firmware (currently not included on this repository) from Hantek6022API (https://github.com/rpcope1/Hantek6022API)
+Load firmware on oscilloscope using fx2load:
+
+# fxload -I <path to .ihx firmware file> -D /dev/bus/usb/<bus>/<device> -t fx2lp
+
+To determine the device path, use lsusb. Look for a device with ID 04b4:6022, such as:
+
+Bus 002 Device 052: ID 04b4:6022 Cypress Semiconductor Corp.
+
+In this case, the device path would be "/dev/bus/usb/002/052".
+After firmware loading, the device should have changed its ID to:
+
+Bus 002 Device 054: ID 04b5:6022 ROHM LSI Systems USA, LLC 
+
+You may also use the included udev rule, so loading firmware manually won't be necessary every time the scope is plugged in.
+
+For optimal performance, make sure the device is connected on a bus that is not used by any other USB devices. This oscilloscope is capable of high data rates that may saturate the available bandwidth on your USB bus. This is especially critical when using bulk transfers, due to their bursty nature, also, there is no guaranteed bandwidth like on isochronous transfers.
+
+
+
+
+
+
+
+
+Thanks to Robert Cope and contributors for developing Hantek6022API, reverse engineering the hardware, and some help on using the hardware, which were very helpful in developing this C library, and to Jochen Hoenicke for the custom firmware, and to those who may have indirectly helped in development, but whose names I do not recall at this time.
