@@ -9,9 +9,10 @@
 #include <libusb-1.0/libusb.h>
 #include "lib6022.h"
 
-#define SAMPLE_RATE 0x04
+#define SAMPLE_RATE 0x01
 #define N_CHANNELS 0x01
 #define VOLTAGE_RANGE 0x0a
+#define FILE_SIZE 8388608
 
 static struct libusb_device_handle *devh = NULL;
 
@@ -43,7 +44,7 @@ int main(int argc, char *argv[])
 
     int err;
     int transf;
-    int bufsize = 2097152;
+    int bufsize = FILE_SIZE;
     unsigned char *readbuf;
     readbuf = malloc(bufsize);
     if(readbuf == NULL)
