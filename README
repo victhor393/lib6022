@@ -1,23 +1,16 @@
 README for lib6022
 
-To compile the library (lib6022.so) and example application (test_lib6022):
+To compile the library (lib6022.so):
 
 cd src/
 make
-
-test_lib6022 should be located in src/, and lib6022.so in lib/.
-
-To run test_lib6022:
-
-cd src/
-LD_LIBRARY_PATH=../lib/:$LD_LIBRARY_PATH ./test_lib6022
 
 To clean all build directories:
 cd src/
 make clean
 
 
-To use the test application, you must first load firmware into your scope. To do this, you need fxload from linux-hotplug (http://sourceforge.net/projects/linux-hotplug/files/fxload/), and custom firmware (currently not included on this repository) from Hantek6022API (https://github.com/rpcope1/Hantek6022API)
+You must first load firmware into your scope before using it. To do this, you need fxload from linux-hotplug (http://sourceforge.net/projects/linux-hotplug/files/fxload/), and custom firmware (currently not included on this repository) from Hantek6022API (https://github.com/rpcope1/Hantek6022API)
 Load firmware on oscilloscope using fx2load:
 
 # fxload -I <path to .ihx firmware file> -D /dev/bus/usb/<bus>/<device> -t fx2lp
